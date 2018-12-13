@@ -867,7 +867,7 @@ public class GameWorld extends Observable implements IGameWorld {
 			Random r = new Random();
 			int roll = r.nextInt(100) + 1;
 			// if NPS is less than 2, it automatically add NPS
-			if (getNPSNum() < 2) {
+			if (getNPSNum() < 5) {
 				// addNonPlayerShip();
 				// setNPSNum(getNPSNum() + 1);
 				if (roll % 10 == 0) {
@@ -876,7 +876,7 @@ public class GameWorld extends Observable implements IGameWorld {
 				}
 			}
 			// if Asteroid is less than 2, it automatically add Asteroid
-			if (getAsteroidNum() < 1) {
+			if (getAsteroidNum() < 3) {
 				// addAsteroid();
 				// setAsteroidNum(getAsteroidNum()+1);
 				if (roll % 20 == 0) {

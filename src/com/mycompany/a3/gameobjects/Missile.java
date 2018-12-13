@@ -19,8 +19,8 @@ public class Missile extends MoveableObject implements IDrawable, ICollider, ISe
 	private int missileFlag; // 0: PS, 1: NPS
 	private boolean ifSelected; // check if the Missile is selected, true: selected, false: unselected
 	private Transform myTranslation, myRotation, myScale;
-	private int missileBlink=2;
-	private boolean blinkLight=false;
+	private int missileBlink = 2;
+	private boolean blinkLight = false;
 
 	public Missile() {
 		myTranslation = Transform.makeIdentity();
@@ -37,11 +37,11 @@ public class Missile extends MoveableObject implements IDrawable, ICollider, ISe
 	public int getMissileFlag() {
 		return this.missileFlag;
 	}
-	
+
 	public int getMissileBlink() {
 		return this.missileBlink;
 	}
-	
+
 	public boolean getBlinkLight() {
 		return this.blinkLight;
 	}
@@ -53,13 +53,13 @@ public class Missile extends MoveableObject implements IDrawable, ICollider, ISe
 	public void setMissileFlag(int newMissileFlag) {
 		this.missileFlag = newMissileFlag;
 	}
-	
+
 	public void setMissileBlink(int newBlink) {
-		this.missileBlink=newBlink;
+		this.missileBlink = newBlink;
 	}
-	
+
 	public void setBlinkLight(boolean newBlink) {
-		this.blinkLight=newBlink;
+		this.blinkLight = newBlink;
 	}
 
 	// rotation origin is
@@ -96,8 +96,7 @@ public class Missile extends MoveableObject implements IDrawable, ICollider, ISe
 		g.setTransform(gXform);
 		int xLoc = (int) (pCmpRelPrnt.getX());
 		int yLoc = (int) (pCmpRelPrnt.getY());
-		// System.out.println("Missile x: " + xLoc);
-		// System.out.println("Missile y: " + yLoc);
+		double scale = 0.5;
 		g.setColor(getObjectColor());
 		if (getMissileFlag() == 0) {
 			if (this.isSelected()) {
@@ -108,11 +107,11 @@ public class Missile extends MoveableObject implements IDrawable, ICollider, ISe
 				// g.fillRect(xLoc + 11, yLoc + 50, 10, 20);
 			}
 			// PS's missile's main body
-			int r1 = 16;
+			int r1 = (int) (16 * scale);
 			g.fillArc(xLoc - r1 / 2, yLoc - r1 / 2, r1, r1, 0, 360);
 			// PS's missile's four engine
-			int r2 = 4;
-			int width = 8;
+			int r2 = (int) (4 * scale);
+			int width = (int) (8 * scale);
 			g.fillRect(xLoc + r1 / 2, yLoc - r2 / 2, width, r2);
 			g.drawRect(xLoc + r1 / 2, yLoc - r2 / 2, width, r2);
 			g.fillRect(xLoc - r2 / 2, yLoc - r1 / 2 - width, r2, width);
@@ -122,11 +121,11 @@ public class Missile extends MoveableObject implements IDrawable, ICollider, ISe
 			g.fillRect(xLoc - r1 / 2 - width, yLoc - r2 / 2, width, r2);
 			g.drawRect(xLoc - r1 / 2 - width, yLoc - r2 / 2, width, r2);
 			// PS's missile's exhause
-			int r3 = 10;
-			if(this.getBlinkLight()) {
+			int r3 = (int) (10 * scale);
+			if (this.getBlinkLight()) {
 				g.setColor(ColorUtil.rgb(0, 255, 0));
-			}else {
-				g.setColor(ColorUtil.rgb(50,205,50));
+			} else {
+				g.setColor(ColorUtil.rgb(50, 205, 50));
 			}
 			g.fillArc(xLoc + r1 / 2 + width, yLoc - r3 / 2, r3, r3, 0, 360);
 			g.fillArc(xLoc - r3 / 2, yLoc - r1 / 2 - width - r3, r3, r3, 0, 360);
@@ -135,12 +134,12 @@ public class Missile extends MoveableObject implements IDrawable, ICollider, ISe
 
 		} else {
 			g.setColor(ColorUtil.rgb(0, 178, 238));
-			int r1 = 20;
+			int r1 = (int) (20 * scale);
 			g.fillArc(xLoc - r1 / 2, yLoc - r1 / 2, r1, r1, 0, 360);
 			g.setColor(ColorUtil.rgb(96, 123, 139));
-			int r2 = 10;
+			int r2 = (int) (10 * scale);
 			g.fillArc(xLoc - r2 / 2, yLoc - r2 / 2, r2, r2, 0, 360);
-			int r3 = 8;
+			int r3 = (int) (8 * scale);
 			g.fillArc(xLoc - r3 / 2, yLoc - r3 / 2, r3, r3, 0, 360);
 		}
 		g.setTransform(gOrigXform);// restore the original xform
@@ -168,9 +167,9 @@ public class Missile extends MoveableObject implements IDrawable, ICollider, ISe
 		} else if (go instanceof Missile) {
 			otherCenterX = go.getPointX();
 			otherCenterY = go.getPointY();
-		} else if(go instanceof Curve) {
-			otherCenterX=((Curve) go).getCurveCenterX();
-			otherCenterY=((Curve) go).getCurveCenterY();
+		} else if (go instanceof Curve) {
+			otherCenterX = ((Curve) go).getCurveCenterX();
+			otherCenterY = ((Curve) go).getCurveCenterY();
 		}
 
 		// find distance between centers
@@ -198,8 +197,8 @@ public class Missile extends MoveableObject implements IDrawable, ICollider, ISe
 			} else {
 				otherRadius = 10;
 			}
-		}else if(go instanceof Curve) {
-			otherRadius=((Curve) go).getCurveRadius();
+		} else if (go instanceof Curve) {
+			otherRadius = ((Curve) go).getCurveRadius();
 		}
 		double radiiSqr = thisRadius * thisRadius + 2 * thisRadius * otherRadius + otherRadius * otherRadius;
 
@@ -246,47 +245,47 @@ public class Missile extends MoveableObject implements IDrawable, ICollider, ISe
 	@Override
 	public boolean contains(float[] fPtr) {
 		// concatenate all LTs
-		Transform concatLTs=Transform.makeIdentity();
+		Transform concatLTs = Transform.makeIdentity();
 		concatLTs.translate(myTranslation.getTranslateX(), myTranslation.getTranslateY());
 		concatLTs.concatenate(myRotation);
 		concatLTs.scale(myScale.getScaleX(), myScale.getScaleY());
-		//calculate inverse of concatLTs
-		Transform inverseConcatLTs=Transform.makeIdentity();
+		// calculate inverse of concatLTs
+		Transform inverseConcatLTs = Transform.makeIdentity();
 		try {
 			concatLTs.getInverse(inverseConcatLTs);
-		}catch(NotInvertibleException e) {
+		} catch (NotInvertibleException e) {
 			System.out.println("Non-invertible xform!");
 		}
-		inverseConcatLTs.transformPoint(fPtr,fPtr);
-		float[] fPtrCopy=new float[] {
-				fPtr[0],fPtr[1]
-		};
-		int xLoc=(int) (this.getPointX()-Game.getMapOriginX());
-		int yLoc=(int) (this.getPointY()-Game.getMapOriginY());
-		System.out.println("xLoc: "+xLoc);
-		System.out.println("yLoc: "+yLoc);
-		System.out.println("pointer x: "+ fPtrCopy[0]);
-		System.out.println("pointer y: "+fPtrCopy[1]);
-		if((fPtrCopy[0]>=xLoc-21)&&(fPtrCopy[0]<=xLoc+21)&&(fPtrCopy[1]>=yLoc-21)&&(fPtrCopy[1]<=yLoc+21)) {
+		inverseConcatLTs.transformPoint(fPtr, fPtr);
+		float[] fPtrCopy = new float[] { fPtr[0], fPtr[1] };
+		int xLoc = (int) (this.getPointX() - Game.getMapOriginX());
+		int yLoc = (int) (this.getPointY() - Game.getMapOriginY());
+		System.out.println("xLoc: " + xLoc);
+		System.out.println("yLoc: " + yLoc);
+		System.out.println("pointer x: " + fPtrCopy[0]);
+		System.out.println("pointer y: " + fPtrCopy[1]);
+		if ((fPtrCopy[0] >= xLoc - 21) && (fPtrCopy[0] <= xLoc + 21) && (fPtrCopy[1] >= yLoc - 21)
+				&& (fPtrCopy[1] <= yLoc + 21)) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}
-//	public boolean contains(Point pPtrRelPrnt, Point pCmpRelPrnt) {
-//		// pointer location relative to parent's origin
-//		int px = pPtrRelPrnt.getX();
-//		int py = Game.getMapHeight()+Game.getMapOriginY()-pPtrRelPrnt.getY();
-//		// shape location relative to parent's origin
-//		int xLoc = (int) (pCmpRelPrnt.getX());
-//		int yLoc = (int) (pCmpRelPrnt.getY());
-////		System.out.println("px: "+px+", py: "+py);
-////		System.out.println("xLoc: "+xLoc+", yLoc: "+yLoc);
-//		if ((px >= xLoc - 21) && (px <= xLoc + 21) && (py >= yLoc - 21) && (py <= yLoc + 21)) {
-//			return true;
-//		} else {
-//			return false;
-//		}
-//	}
+	// public boolean contains(Point pPtrRelPrnt, Point pCmpRelPrnt) {
+	// // pointer location relative to parent's origin
+	// int px = pPtrRelPrnt.getX();
+	// int py = Game.getMapHeight()+Game.getMapOriginY()-pPtrRelPrnt.getY();
+	// // shape location relative to parent's origin
+	// int xLoc = (int) (pCmpRelPrnt.getX());
+	// int yLoc = (int) (pCmpRelPrnt.getY());
+	//// System.out.println("px: "+px+", py: "+py);
+	//// System.out.println("xLoc: "+xLoc+", yLoc: "+yLoc);
+	// if ((px >= xLoc - 21) && (px <= xLoc + 21) && (py >= yLoc - 21) && (py <=
+	// yLoc + 21)) {
+	// return true;
+	// } else {
+	// return false;
+	// }
+	// }
 
 }

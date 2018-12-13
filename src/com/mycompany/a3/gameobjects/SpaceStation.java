@@ -23,8 +23,8 @@ public class SpaceStation extends FixedObject implements IDrawable, ICollider {
 		myRotation = Transform.makeIdentity();
 		myScale = Transform.makeIdentity();
 		Random r = new Random();
-		setPointX(r.nextInt(Game.getMapWidth() + 1-80) + Game.getMapOriginX());
-		setPointY(r.nextInt(Game.getMapHeight() + 1-80) + Game.getMapOriginY());
+		setPointX(r.nextInt(Game.getMapWidth() + 1 - 80) + Game.getMapOriginX());
+		setPointY(r.nextInt(Game.getMapHeight() + 1 - 80) + Game.getMapOriginY());
 		setObjectColor(ColorUtil.rgb(0, 0, 255));
 		setBlinkRate(r.nextInt(5));
 		setObjectID();
@@ -59,33 +59,31 @@ public class SpaceStation extends FixedObject implements IDrawable, ICollider {
 		Transform gXform = Transform.makeIdentity();
 		g.getTransform(gXform);
 		Transform gOrigXform = gXform.copy(); // save the original xform
-		gXform.translate((float)(this.getPointX()+40-Game.getMapOriginX()), (float)(this.getPointY()+40-Game.getMapOriginY()));
-		gXform.translate(myTranslation.getTranslateX(),myTranslation.getTranslateY());
+		gXform.translate((float) (this.getPointX() + 40 - Game.getMapOriginX()),
+				(float) (this.getPointY() + 40 - Game.getMapOriginY()));
+		gXform.translate(myTranslation.getTranslateX(), myTranslation.getTranslateY());
 		gXform.concatenate(myRotation);
 		gXform.scale(myScale.getScaleX(), myScale.getScaleY());
-		gXform.translate((float)(-(this.getPointX()+40-Game.getMapOriginX())), (float)(-(this.getPointY()+40-Game.getMapOriginY())));
+		gXform.translate((float) (-(this.getPointX() + 40 - Game.getMapOriginX())),
+				(float) (-(this.getPointY() + 40 - Game.getMapOriginY())));
 		g.setTransform(gXform);
 
 		int xLoc = (int) (pCmpRelPrnt.getX());
 		int yLoc = (int) (pCmpRelPrnt.getY());
+		double scale = 0.5;
 		g.setColor(getObjectColor());
-		// g.fillArc(xLoc, yLoc, 60, 60, 0, 360);
-		int r1=80;
-		int r2=70;
+		int r1 = (int) (80 * scale);
+		int r2 = (int) (70 * 0.5);
 		g.fillArc(xLoc, yLoc, r1, r1, 0, 360);
 		g.setColor(ColorUtil.BLACK);
-		g.fillArc(xLoc+r1/2-r2/2, yLoc+r1/2-r2/2, r2, r2, 0, 360);
-		int r3=20;
+		g.fillArc(xLoc + r1 / 2 - r2 / 2, yLoc + r1 / 2 - r2 / 2, r2, r2, 0, 360);
+		int r3 = (int) (20 * 0.5);
 		if (getBlinkLight() == true) {
 			g.setColor(ColorUtil.GREEN);
 		} else {
 			g.setColor(ColorUtil.MAGENTA);
 		}
-		g.fillArc(xLoc+r1/2-r3/2, yLoc+r1/2-r3/2, r3, r3, 0, 360);
-//		int r3=3;
-//		g.setColor(ColorUtil.rgb(0, 0, 255));
-//		g.fillRect(xLoc+r1/2-r3, yLoc+r1/2-r2/2, r3*2, r2/2);
-	
+		g.fillArc(xLoc + r1 / 2 - r3 / 2, yLoc + r1 / 2 - r3 / 2, r3, r3, 0, 360);
 
 		g.setTransform(gOrigXform); // restore the original xform
 	}
@@ -107,7 +105,7 @@ public class SpaceStation extends FixedObject implements IDrawable, ICollider {
 			otherCenterY = go.getPointY();
 		} else if (go instanceof PlayerShip) {
 			otherCenterX = go.getPointX();
-			otherCenterY = go.getPointY()-11.667;
+			otherCenterY = go.getPointY() - 11.667;
 		} else if (go instanceof SpaceStation) {
 			otherCenterX = go.getPointX() + 40;
 			otherCenterY = go.getPointY() + 40;
@@ -127,7 +125,7 @@ public class SpaceStation extends FixedObject implements IDrawable, ICollider {
 		if (go instanceof Asteroid) {
 			otherRadius = go.getObjectSize() / 2;
 		} else if (go instanceof NonPlayerShip) {
-			otherRadius = this.getObjectSize()*4;
+			otherRadius = this.getObjectSize() * 4;
 		} else if (go instanceof PlayerShip) {
 			otherRadius = 41.667;
 		} else if (go instanceof SpaceStation) {

@@ -176,7 +176,7 @@ public class Game extends Form implements Runnable {
 		// create timer and provide a runnable
 		UITimer timer = new UITimer(this);
 		// make the timer tick every second and bind it to this form
-		timer.schedule(200, true, this);
+		timer.schedule(100, true, this);
 
 		// left Container with the BoxLayout positioned on the west
 		leftContainer = new Container();

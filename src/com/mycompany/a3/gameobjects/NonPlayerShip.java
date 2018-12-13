@@ -24,15 +24,10 @@ public class NonPlayerShip extends MoveableObject implements IDrawable, ICollide
 		myTranslation = Transform.makeIdentity();
 		myRotation = Transform.makeIdentity();
 		myScale = Transform.makeIdentity();
-		// setNonPlayerShipSize((r.nextInt(2) + 1) * 10);
-		setObjectSize((r.nextInt(2) + 1) * 5);
+		setObjectSize((r.nextInt(2) + 1) * 2);
 		setObjectSpeed(r.nextInt(10) + 1);
 		setObjectDirection(r.nextInt(360));
 		setNPSMissileCount(2);
-//		setPointX(r.nextInt(Game.getMapWidth() - 3* this.getObjectSize()) + Game.getMapOriginX()
-//				+ 4 * this.getObjectSize());
-//		setPointY(r.nextInt(Game.getMapHeight() - 3 * this.getObjectSize()) + Game.getMapOriginY()
-//				+ 4 * this.getObjectSize());
 		setPointX(r.nextInt((Game.getMapWidth()-this.getObjectSize()*12))+Game.getMapOriginX()+this.getObjectSize()*4);
 		setPointY(r.nextInt((Game.getMapHeight()-this.getObjectSize()*12))+Game.getMapOriginY()+this.getObjectSize()*4);
 		setObjectColor(ColorUtil.rgb(255, 0, 0));
@@ -41,17 +36,9 @@ public class NonPlayerShip extends MoveableObject implements IDrawable, ICollide
 		// rotate(getObjectDirection()-90);
 	}
 
-	// public int getNonPlayerShipSize() {
-	// return this.nonPlayerShipSize;
-	// }
-
 	public int getNPSMissileCount() {
 		return this.npsMissileCount;
 	}
-
-	// public void setNonPlayerShipSize(int newNonPlayerShipSize) {
-	// this.nonPlayerShipSize = newNonPlayerShipSize;
-	// }
 
 	public void setNPSMissileCount(int newNPSMissileCount) {
 		this.npsMissileCount = newNPSMissileCount;

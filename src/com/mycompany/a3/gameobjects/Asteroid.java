@@ -24,7 +24,7 @@ public class Asteroid extends MoveableObject implements IDrawable, ICollider, IS
 		myRotation = Transform.makeIdentity();
 		myScale = Transform.makeIdentity();
 		Random r = new Random();
-		setObjectSize((r.nextInt(25) + 6) * 5);
+		setObjectSize((r.nextInt(25) + 6)*2);
 		setObjectSpeed(r.nextInt(10) + 1);
 		setObjectDirection(r.nextInt(360));
 		// setPointX(r.nextInt(Game.getMapWidth() - this.getObjectSize()*2) +

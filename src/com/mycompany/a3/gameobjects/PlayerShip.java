@@ -137,31 +137,22 @@ public class PlayerShip extends MoveableObject implements ISteerable, IDrawable,
 		g.getTransform(gXform);
 		Transform gOrigXform = gXform.copy(); // save the original xform
 		gXform.translate((float) (this.getPointX() - Game.getMapOriginX()),
-				(float) (this.getPointY() +15 - Game.getMapOriginY()));
+				(float) (this.getPointY() + 15 - Game.getMapOriginY()));
 		gXform.translate(myTranslation.getTranslateX(), myTranslation.getTranslateY());
 		gXform.concatenate(myRotation);
 		gXform.scale(myScale.getScaleX(), myScale.getScaleY());
 		gXform.translate((float) (-(this.getPointX() - Game.getMapOriginX())),
-				(float) (-(this.getPointY() +15- Game.getMapOriginY())));
-
-		// System.out.println("pCmpRelScrnX: "+pCmpRelScrn.getX());
-		// System.out.println("pCmpRelScrnY: "+ pCmpRelScrn.getY());
-		// System.out.println("ps x: "+this.getPointX());
-		// System.out.println("ps y: "+this.getPointY());
-		// float x=(float)(this.getPointX()-Game.getMapOriginX());
-		// float y=(float)(this.getPointY()-Game.getMapOriginY());
-		// System.out.println("x: "+x);
-		// System.out.println("y: "+y);
-
+				(float) (-(this.getPointY() + 15 - Game.getMapOriginY())));
 		g.setTransform(gXform);
 		// draw PS
 		int xLoc = (int) (pCmpRelPrnt.getX());
 		int yLoc = (int) (pCmpRelPrnt.getY());
+		double scale = 0.7;
 		// PS's energy board
-		int r1 = 60;
+		int r1 = (int) (60 * scale);
 		g.setColor(ColorUtil.rgb(54, 54, 54));
 		g.fillRect(xLoc - r1 / 2, yLoc - r1 / 2, r1, r1);
-		int r2 = 5;
+		int r2 = (int) (5 * scale);
 		int gap = r1 / 5;
 		g.setColor(ColorUtil.GRAY);
 		// vertical rectangle
@@ -179,9 +170,9 @@ public class PlayerShip extends MoveableObject implements ISteerable, IDrawable,
 		g.fillRect(xLoc - r1 / 2 - r2 / 2, yLoc - r1 / 2 + gap * 4 - r2 / 2, r1 + r2, r2);
 		g.fillRect(xLoc - r1 / 2 - r2 / 2, yLoc - r1 / 2 + gap * 5 - r2 / 2, r1 + r2, r2);
 		// two side wing
-		int r3 = 70;
-		int width = 20;
-		int height = 30;
+		int r3 = (int) (70 * scale);
+		int width = (int) (20 * scale);
+		int height = (int) (30 * scale);
 		g.setColor(ColorUtil.WHITE);
 		g.fillTriangle(xLoc - r1 / 2 - r2 / 2, yLoc - r1 / 2 + r1 + r2, xLoc - r1 / 2 - r2 / 2,
 				yLoc - r1 / 2 - r2 / 2 - r3, xLoc - r1 / 2 - r2 / 2 - width, yLoc - r1 / 2 - r2 / 2 + height);
@@ -189,56 +180,23 @@ public class PlayerShip extends MoveableObject implements ISteerable, IDrawable,
 				yLoc - r1 / 2 - r2 / 2 - r3, xLoc + r1 / 2 + r2 / 2 + width, yLoc - r1 / 2 - r2 / 2 + height);
 		// Loading missile place
 		g.setColor(ColorUtil.LTGRAY);
-		int lWidth = 15;
-		int lHeight = 10;
+		int lWidth = (int) (15 * scale);
+		int lHeight = (int) (10 * scale);
 		g.drawRect(xLoc - lWidth / 2, yLoc - r1 / 2 + r1 + r2, lWidth, lHeight);
 		g.fillRect(xLoc - lWidth / 2, yLoc - r1 / 2 + r1 + r2, lWidth, lHeight);
 		// Loading missile top
 		g.setColor(ColorUtil.MAGENTA);
-		int r4 = 10;
+		int r4 = (int) (10 * scale);
 		g.fillTriangle(xLoc - lWidth / 2, yLoc - r1 / 2 + r1 + r2 + lHeight, xLoc + lWidth / 2,
 				yLoc - r1 / 2 + r1 + r2 + lHeight, xLoc, yLoc - r1 / 2 + r1 + r2 + lHeight + r4);
-		// // missile launcher
-		int length = 40;
+		// missile launcher
+		int length = (int) (40 * scale);
 		// int mx = (int) (length * Math.cos(Math.toRadians(sml.getSMLDirection())));
 		// int my = (int) (length * Math.sin(Math.toRadians(sml.getSMLDirection())));
 		int mx = (int) (length * Math.cos(Math.toRadians(this.getMLAngle())));
 		int my = (int) (length * Math.sin(Math.toRadians(this.getMLAngle())));
 		g.drawLine(xLoc, yLoc - r1 / 2 + r1 + r2 + lHeight + r4, xLoc + mx,
 				yLoc - r1 / 2 + r1 + r2 + lHeight + r4 + my);
-
-		// // draw PS
-		// int xLoc = (int) (pCmpRelPrnt.getX());
-		// int yLoc = (int) (pCmpRelPrnt.getY());
-		// // PS's main body
-		// g.setColor(getObjectColor());
-		// g.fillRect(xLoc-11, yLoc-25, 22, 50);
-		// g.setColor(ColorUtil.WHITE);
-		// g.drawRect(xLoc-11, yLoc-25, 22, 50);
-		// // PS's top
-		// g.fillTriangle(xLoc-11, yLoc+25, xLoc+11, yLoc+25, xLoc, yLoc+45);
-		// // PS's two sides
-		// g.setColor(ColorUtil.rgb(148, 96, 255));
-		// g.fillTriangle(xLoc-44, yLoc-25, xLoc-11, yLoc-25, xLoc-11, yLoc-5);
-		// g.fillTriangle(xLoc+11, yLoc-25, xLoc+44, yLoc-25, xLoc+11, yLoc-5);
-		// // PS's two engines
-		// g.drawRect(xLoc - 26, yLoc - 35, 10, 10);
-		// g.drawRect(xLoc + 16, yLoc - 35, 10, 10);
-		// // PS's two pushing gas
-		// g.setColor(ColorUtil.YELLOW);
-		// g.fillArc(xLoc - 26, yLoc - 60, 10, 10, 0, 360);
-		// g.fillArc(xLoc + 26, yLoc - 60, 10, 10, 0, 360);
-		// // draw PS's missile launcher
-		// int r = 150;
-		// g.setColor(ColorUtil.LTGRAY);
-		// g.drawArc(xLoc - r / 2, yLoc - r / 2, r, r, 0, 360);
-		//
-		// g.setColor(ColorUtil.MAGENTA);
-		// int xLoc2 = (int) (xLoc + 0.5 * r *
-		// Math.cos(Math.toRadians(sml.getSMLDirection())));
-		// int yLoc2 = (int) (yLoc + 0.5 * r *
-		// Math.sin(Math.toRadians(sml.getSMLDirection())));
-		// g.fillArc(xLoc2, yLoc2, 8, 8, 0, 360);
 
 		g.setTransform(gOrigXform); // restore the original xform
 	}
@@ -287,11 +245,11 @@ public class PlayerShip extends MoveableObject implements ISteerable, IDrawable,
 		} else if (go instanceof SpaceStation) {
 			otherRadius = 40;
 		} else if (go instanceof Missile) {
-			Missile m=(Missile)go;
-			if(m.getMissileFlag()==0) {
-				otherRadius=21;
-			}else {
-				otherRadius=10;
+			Missile m = (Missile) go;
+			if (m.getMissileFlag() == 0) {
+				otherRadius = 21;
+			} else {
+				otherRadius = 10;
 			}
 		}
 		double radiiSqr = thisRadius * thisRadius + 2 * thisRadius * otherRadius + otherRadius * otherRadius;

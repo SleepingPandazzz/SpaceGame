@@ -240,7 +240,6 @@ public class Curve extends GameObject implements IDrawable, ICollider {
 		if (straightEnough(c)) {
 			g.drawLine((int) c[0].getX(), (int) c[0].getY(),
 					(int) c[3].getX(), (int) c[3].getY());
-			System.out.println("drawing curves");
 		} else {
 			Point2D[] left = new Point2D[4];
 			Point2D[] right = new Point2D[4];
